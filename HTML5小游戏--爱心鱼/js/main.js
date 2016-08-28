@@ -38,6 +38,9 @@ var data;	// 计数
 var wave; // 白色的圈，用于特效
 var halo; // 大鱼喂小鱼圆圈
 
+var dust; // 漂浮物
+var dustPic = []; // 用于存放漂浮物图片
+
 document.body.onload = game;
 
 function game(){
@@ -113,6 +116,14 @@ function init(){
   // 实例化halo并初始化
   halo = new haloObj();
   halo.init();
+
+  for (var i = 0; i < 7; i++) {
+  	dustPic[i] = new Image();
+  	dustPic[i].src = "./src/dust" + i + ".png";
+  }
+  // 实例化漂浮物并初始化
+  dust = new dustObj();
+  dust.init();
 }
 function gameLoop(){
 	requestAnimFrame(gameLoop);
@@ -145,6 +156,8 @@ function gameLoop(){
 	wave.draw();
 	// 喂小鱼圈圈绘制
 	halo.draw();
+	// 绘制漂浮物
+	dust.draw();
 }
 // 控制鼠标移动函数，增加判断，gameover后不能控制
 function onMouseMove(e){
